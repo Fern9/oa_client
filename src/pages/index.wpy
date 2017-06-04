@@ -1,0 +1,91 @@
+<!--suppress CssInvalidPropertyValue -->
+<style lang="less">
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 150 rpx;
+    height: 150 rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+
+  .my_report {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 600 rpx;
+  }
+</style>
+<template>
+  <view class="container">
+    <view class="userinfo" @tap="handleViewTap">
+      <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
+      <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+    </view>
+    <view class="my_report">
+      <button type="primary" bindtap="primary"> 我要报修 </button>
+    </view>
+  </view>
+
+  <Tabbar :tabList="tabList"></Tabbar>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import Tabbar from '../tests/tabbar'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '首页'
+    }
+    components = {
+      Tabbar: Tabbar
+    }
+    data = {
+      userInfo: {
+        nickName: '加载中1...'
+      },
+      tabList: [{
+        sTitle: '我要报修',
+        iCount: 0,
+        sIconUrl: '../images/ic_assignment_black_24dp_2x.png'
+      }, {
+        sTitle: '我的',
+        iCount: 0,
+        sIconUrl: '../images/ic_account_circle_black_24dp_2x.png'
+      }]
+    }
+
+    computed = {}
+
+    methods = {}
+
+    onLoad () {
+      let self = this
+      this.$parent.getUserInfo(function (userInfo) {
+        console.log('ok')
+        if (userInfo) {
+          console.log(userInfo)
+          self.userInfo = userInfo
+          self.$apply()
+          wepy.redirectTo({
+            url: 'register?'
+          })
+          wepy.showToast({
+            title: '成功',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      })
+    }
+  }
+</script>

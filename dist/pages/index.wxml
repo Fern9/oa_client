@@ -1,0 +1,33 @@
+
+  <view class="container">
+    <view class="userinfo" bindtap="handleViewTap">
+      <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
+      <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+    </view>
+    <view class="my_report">
+      <button type="primary" bindtap="primary"> 我要报修 </button>
+    </view>
+  </view>
+
+  
+
+  <!-- 默认在底部 -->
+  <view class="jh-tab-bar">
+    <view class="jh-tab-item"  wx:for="{{ $Tabbar$tabList }}" wx:for-item="tabItem" wx:for-index="index" wx:key="sTitle">
+      <!-- 引入单个的tab -->
+      <view class="jh-tab-content" data-key="{{ tabItem.sTitle }}">
+        <!-- icon -->
+        <view class="jh-tab-icon">
+          <image src="{{ tabItem.sIconUrl }}"/>
+        </view>
+        <!-- 标题 -->
+        <view class="jh-tab-title">
+          <text>{{ tabItem.sTitle }}</text>
+        </view>
+        <!-- 右上角 红色数字 -->
+        <view class="jh-tab-bubble" wx:if="{{ tabItem.iCount > 0}}">
+          <text class="jh-tab-count">{{ $Tabbar$count_show[index] }}</text>
+        </view>
+      </view>
+    </view>
+  </view>

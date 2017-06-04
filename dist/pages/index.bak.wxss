@@ -1,0 +1,8 @@
+@import "./../tests/tabbar.wxss";
+@import "./../npm/wepy-com-toast/toast.wxss";
+@import "./../tests/group.wxss";
+@import "./../tests/list.wxss";
+@import "./../tests/counter.wxss";
+@import "./../tests/counter.wxss";
+@import "./../tests/panel.wxss";
+.userinfo{display:flex;flex-direction:column;align-items:center}.userinfo-avatar{width:80 rpx;height:80 rpx;border-radius:50%}.userinfo-nickname{color:#aaa}
