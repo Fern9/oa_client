@@ -76,7 +76,7 @@
           console.log(userInfo)
           self.userInfo = userInfo
           self.$apply()
-          wepy.redirectTo({
+          wepy.navigateTo({
             url: 'register?'
           })
           wepy.showToast({
