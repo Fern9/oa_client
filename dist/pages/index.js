@@ -13,7 +13,7 @@ var _wepy2 = _interopRequireDefault(_wepy);
 
 var _tabbar = require('./../components/tabbar.js');
 
-var _tabbar2 = _interoRequireDefault(_tabbar);
+var _tabbar2 = _interopRequireDefault(_tabbar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
