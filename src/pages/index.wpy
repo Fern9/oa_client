@@ -40,7 +40,7 @@
 
 <script>
   import wepy from 'wepy'
-  import Tabbar from '../tests/tabbar'
+  import Tabbar from '../components/tabbar'
 
   export default class Index extends wepy.page {
     config = {
