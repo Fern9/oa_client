@@ -59,7 +59,7 @@
                                     encryptedData: res.encryptedData,
                                     iv: res.iv
                                 }, (res) => {
-                                    if (res.code == 404) {
+                                    if (res.code === 404) {
                                         wepy.redirectTo({
                                             url: 'register?'
                                         })
