@@ -46,14 +46,57 @@
       wepy.login({
         success: function (res) {
           if (res.code) {
+            console.log('code', res.code)
             if (this.globalData.userInfo) {
               return this.globalData.userInfo
             }
             wepy.getUserInfo({
-              success (res) {
-                console.log(res)
-                that.globalData.userInfo = res.userInfo
-                cb && cb(res.userInfo)
+              success (user_res) {
+                console.log('userinfo:', user_res)
+                that.globalData.userInfo = user_res.userInfo
+                cb && cb(user_res.userInfo)
+                wx.request({
+                  url: 'http://127.0.0.1:5000/auth/login',
+                  method: 'POST',
+                  data:{
+                    code: res.code,
+                    iv: user_res.iv,
+                    encryptedData: user_res.encryptedData,
+                  },
+                  success: function (result) {
+                      if(result.data.code == 404){
+                          wx.login({
+                            success: function (res) {
+                              wx.request({
+                                url: 'http://127.0.0.1:5000/auth/user',
+                                method: "POST",
+                                data:{
+                                  action: 'register',
+                                  code: res.code,
+                                  wx_userinfo: user_res.userInfo,
+                                  userinfo: {'name': 'zhangsan1'}
+                                },
+                                success: function (login_res) {
+                                  console.log(login_res)
+
+                                }
+                              })
+                            }
+                          })
+                      }else{
+                        wx.request({
+                          url: 'http://127.0.0.1:5000/auth/user',
+                          data:{
+                            view: 'get_curr_user_info',
+                          },
+                          success: function (login_res) {
+                            console.log(login_res)
+
+                          }
+                        })
+                      }
+                  }
+                })
               }
             })
           } else {
