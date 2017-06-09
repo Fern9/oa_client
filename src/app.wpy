@@ -1,66 +1,80 @@
 <style lang="less">
-  @import './we_styles/weui.less';
+    @import './we_styles/weui.less';
 
-  .container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-  }
+    .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
 </style>
 
 <script>
-  import wepy from 'wepy'
-  import 'wepy-async-function'
-
-  export default class extends wepy.app {
-    config = {
-      pages: [
-        'pages/index',
-        'pages/register'
-      ],
-      window: {
-        backgroundTextStyle: 'light',
-        navigationBarBackgroundColor: '#fff',
-        navigationBarTitleText: 'WeChat',
-        navigationBarTextStyle: 'black'
-      }
-    }
-
-    globalData = {
-      userInfo: null
-    }
-
-    constructor () {
-      super()
-      this.use('requestfix')
-    }
-
-    onLaunch () {
-    }
-
-    getUserInfo (cb) {
-      const that = this
-      wepy.login({
-        success: function (res) {
-          if (res.code) {
-            if (this.globalData.userInfo) {
-              return this.globalData.userInfo
+    import wepy from 'wepy'
+    import 'wepy-async-function'
+    import Net from './utils/net'
+    export default class extends wepy.app {
+        config = {
+            pages: [
+                'pages/index',
+                'pages/register'
+            ],
+            window: {
+                backgroundTextStyle: 'light',
+                navigationBarBackgroundColor: '#fff',
+                navigationBarTitleText: 'WeChat',
+                navigationBarTextStyle: 'black'
             }
-            wepy.getUserInfo({
-              success (res) {
-                console.log(res)
-                that.globalData.userInfo = res.userInfo
-                cb && cb(res.userInfo)
-              }
-            })
-          } else {
-            console.log('获取用户登录态失败！' + res.errMsg)
-          }
         }
-      })
+
+        globalData = {
+            userInfo: null
+        }
+
+        constructor () {
+            super()
+            this.use('requestfix')
+        }
+
+        onLaunch () {
+        }
+
+        getUserInfo (cb) {
+            const that = this
+            wepy.login({
+                success: function (res) {
+                    if (res.code) {
+                        console.log(res)
+                        let code = res.code
+                        if (this.globalData.userInfo) {
+                            return this.globalData.userInfo
+                        }
+                        wepy.getUserInfo({
+                            success (res) {
+                                console.log(res)
+                                Net.post('/login', {
+                                    code: code,
+                                    encryptedData: res.encryptedData,
+                                    iv: res.iv
+                                }, (res) => {
+                                    if (res.code == 404) {
+                                        wepy.redirectTo({
+                                            url: 'register?'
+                                        })
+                                    }
+                                })
+
+                                that.globalData.userInfo = res.userInfo
+                                cb && cb(res.userInfo)
+                            }
+                        })
+                    } else {
+                        console.log('获取用户登录态失败！' + res.errMsg)
+                    }
+                }
+            })
+        }
     }
-  }
 </script>

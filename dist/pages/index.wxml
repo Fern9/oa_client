@@ -1,15 +1,15 @@
 
-  <view class="container">
-    <view class="userinfo" bindtap="handleViewTap">
-      <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
-      <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+    <view class="container">
+        <view class="userinfo" bindtap="handleViewTap">
+            <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
+            <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+        </view>
+        <view class="my_report">
+            <button type="primary" bindtap="primary"> 我要报修 </button>
+        </view>
     </view>
-    <view class="my_report">
-      <button type="primary" bindtap="primary"> 我要报修 </button>
-    </view>
-  </view>
 
-  
+    
 
   <!-- 默认在底部 -->
   <view class="jh-tab-bar">
