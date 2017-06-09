@@ -1,75 +1,77 @@
 
-  <form bindsubmit="formSubmit" bindreset="formReset">
-    <view class="weui-cells__title">个人信息</view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">姓名</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入真实姓名"/>
-        </view>
-      </view>
-
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">年龄</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入年龄"/>
-        </view>
-      </view>
-
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">手机号</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入手机号"/>
-        </view>
-      </view>
-
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">地址</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入地址"/>
-        </view>
-      </view>
-
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">单位</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入单位"/>
-        </view>
-      </view>
-
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">邮箱</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入邮箱号"/>
-        </view>
-      </view>
-
-      <checkbox-group bindchange="bindAgreeChange">
-        <label class="weui-agree" for="weuiAgree">
-          <view class="weui-agree__text">
-            <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" bindtap="changeAgree" checked="{{isAgree}}"/>
-            <view class="weui-agree__checkbox-icon">
-              <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9"  wx:if="{{isAgree}}"/>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class="weui-cells__title">个人信息</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">姓名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入真实姓名"/>
+                </view>
             </view>
-            阅读并同意
-            <navigator url="" class="weui-agree__link">《相关条款》</navigator>
-          </view>
-        </label>
-      </checkbox-group>
-    </view>
-    <view class="weui-btn-area">
-      <button class="weui-btn" type="primary" bindtap="showTopTips">确定</button>
-    </view>
-  </form>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">年龄</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入年龄"/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">手机号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入手机号"/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">地址</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入地址"/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">单位</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入单位"/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">邮箱</view>
+                </view>
+                <view class="weui-cell__bd">
+                    
+    <input value="{{$Input$val}}" type="{{$Input$type}}" password="{{$Input$password}}" placeholder="{{$Input$placeholder}}" placeholder-style="{{$Input$placeholderStyle}}" placeholder-class="{{$Input$placeholderClass}}" disabled="{{$Input$disabled}}" maxlength="{{$Input$maxlength}}" cursor-spacing="{{$Input$cursorSpacing}}" auto-focus="{{$Input$autoFocus}}" focus="{{$Input$focus}}" confirm-type="{{$Input$confirmType}}" confirm-hold="{{$Input$confirmHold}}" class="{{$Input$className}}" bindchange="$Input$bindinput" bindfocus="$Input$bindfocus" bindblur="$Input$bindblur" bindconfirm="$Input$bindconfirm"/>
+
+                </view>
+            </view>
+
+            <checkbox-group bindchange="changeAgree">
+                <label class="weui-agree" for="weuiAgree">
+                    <view class="weui-agree__text">
+                        <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}"/>
+                        <view class="weui-agree__checkbox-icon">
+                            <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9"  wx:if="{{isAgree}}"/>
+                        </view>
+                        阅读并同意
+                        <navigator url="" class="weui-agree__link">《相关条款》</navigator>
+                    </view>
+                </label>
+            </checkbox-group>
+        </view>
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="showTopTips">确定</button>
+        </view>
+    </form>
