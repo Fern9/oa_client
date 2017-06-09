@@ -52,6 +52,7 @@
                             return this.globalData.userInfo
                         }
                         wepy.getUserInfo({
+                            
                             success (res) {
                                 console.log(res)
                                 Net.post('/login', {
