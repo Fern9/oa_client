@@ -52,7 +52,6 @@
                             return this.globalData.userInfo
                         }
                         wepy.getUserInfo({
-                            
                             success (res) {
                                 console.log(res)
                                 Net.post('/login', {
@@ -62,7 +61,7 @@
                                 }, (res) => {
                                     if (res.code === 404) {
                                         wepy.redirectTo({
-                                            url: 'register?'
+                                            url: 'register?code=' + code
                                         })
                                     }
                                 })

@@ -25,7 +25,7 @@
                     <view class="weui-label">姓名</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入真实姓名"/>
+                    <input name="name" class="weui-input" placeholder="请输入真实姓名"/>
                 </view>
             </view>
 
@@ -34,7 +34,7 @@
                     <view class="weui-label">年龄</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入年龄"/>
+                    <input name="age" class="weui-input" placeholder="请输入年龄"/>
                 </view>
             </view>
 
@@ -43,7 +43,7 @@
                     <view class="weui-label">手机号</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入手机号"/>
+                    <input name="phone" class="weui-input" placeholder="请输入手机号"/>
                 </view>
             </view>
 
@@ -52,7 +52,7 @@
                     <view class="weui-label">地址</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入地址"/>
+                    <input name="address" class="weui-input" placeholder="请输入地址"/>
                 </view>
             </view>
 
@@ -61,7 +61,7 @@
                     <view class="weui-label">单位</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入单位"/>
+                    <input name="company" class="weui-input" placeholder="请输入单位"/>
                 </view>
             </view>
 
@@ -70,15 +70,14 @@
                     <view class="weui-label">邮箱</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <Input className="weui-input" placeholder="请输入邮箱号" value="email" @input.user="focuss"/>
+                    <input name="email" className="weui-input" placeholder="请输入邮箱号"/>
                 </view>
             </view>
 
             <checkbox-group @change="changeAgree">
                 <label class="weui-agree" for="weuiAgree">
                     <view class="weui-agree__text">
-                        <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree"
-                                  checked="{{isAgree}}"/>
+                        <checkbox class="weui-agree__checkbox" id="weuiAgree" value="1" checked="{{isAgree}}"/>
                         <view class="weui-agree__checkbox-icon">
                             <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9"
                                   wx:if="{{isAgree}}"></icon>
@@ -90,41 +89,69 @@
             </checkbox-group>
         </view>
         <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" @tap="showTopTips">确定</button>
+            <button class="weui-btn" type="primary" formType="submit">确定</button>
         </view>
     </form>
 
 </template>
 <script>
     import wepy from 'wepy'
-    import Input from '../components/native/input'
+    import Net from '../utils/net'
     export default class Register extends wepy.page {
-        onLoad () {
-
+        onLoad (query) {
+            console.log(query)
+            this.code = query.code
+            this.wx_userinfo = this.$parent.globalData.userInfo
         }
 
         config = {
             navigationBarTitleText: '注册'
         }
-        components = {
-            Input: Input
-        }
+        components = {}
         data = {
             isAgree: false,
-            email: '123'
+            wx_userinfo: null,
+            code: null
         }
 
         computed = {}
 
         methods = {
             changeAgree(v) {
-                console.log(v)
-//                this.isAgree = v
+                this.isAgree = !!v.detail.value[0]
             },
-            focuss(v) {
-                console.log('focuss')
-                console.log(v)
+            formSubmit(event) {
+                let form = event.detail.value
+                console.log(form)
+                for (let key in form) {
+                    if (form[key] === '') {
+                        wepy.showModal({
+                            title: '提示',
+                            content: '你还没有填完呢',
+                            showCancel: false,
+                            confirmText: '继续填'
+                        })
+                        return
+                    }
+                }
+
+                let userinfo = event.detail.value
+                Net.post('/user', {
+                    action: 'register',
+                    wx_userinfo: this.wx_userinfo,
+                    userinfo: userinfo,
+                    code: this.code
+                }, (res) => {
+                    if (res.code === 200) {
+                        wepy.showToast({
+                            title: '注册成功',
+                            icon: 'success',
+                            duration: 2000
+                        })
+                    }
+                })
             }
+
         }
     }
 
