@@ -19,7 +19,8 @@
         config = {
             pages: [
                 'pages/index',
-                'pages/register'
+                'pages/register',
+                'pages/repair_apply'
             ],
             window: {
                 backgroundTextStyle: 'light',
@@ -39,6 +40,7 @@
         }
 
         onLaunch () {
+            console.log('caniuse', wepy.canIUse('request.success.header'))
         }
 
         getUserInfo (cb) {
@@ -54,16 +56,21 @@
                         wepy.getUserInfo({
                             success (res) {
                                 console.log(res)
-                                Net.post('/login', {
+                                Net.post('/auth/login', {
                                     code: code,
                                     encryptedData: res.encryptedData,
                                     iv: res.iv
                                 }, (res) => {
                                     if (res.code === 404) {
                                         wepy.redirectTo({
-                                            url: 'register?code=' + code
+                                            url: 'register'
                                         })
                                     }
+                                    Net.post('/auth/login', {
+                                        aa: '111'
+                                    }, (res) => {
+
+                                    })
                                 })
 
                                 that.globalData.userInfo = res.userInfo

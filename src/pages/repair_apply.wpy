@@ -1,0 +1,28 @@
+<!--suppress CssInvalidPropertyValue -->
+<style>
+
+</style>
+<template>
+    <RapCom/>
+
+</template>
+<script>
+    import wepy from 'wepy'
+    import RapCom from '../components/repair_apply_com'
+    export default class Rap extends wepy.page {
+        onLoad (query) {}
+
+        config = {
+            navigationBarTitleText: '提交申请'
+        }
+        components = {
+            RapCom: RapCom
+        }
+        data = {}
+
+        computed = {}
+
+        methods = {}
+    }
+
+</script>

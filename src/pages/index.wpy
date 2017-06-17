@@ -30,47 +30,64 @@
             <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
             <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
         </view>
-        <view class="my_report">
-            <button type="primary" bindtap="primary"> 我要报修 </button>
+
+        <view wx:if="{{tabIndex==0}}" class="my_report">
+            <button type="primary" bindtap="click_report"> 我要报修 </button>
         </view>
+
+        <UserInfo wx:else/>
     </view>
 
-    <Tabbar :tabList="tabList"></Tabbar>
+    <Tabbar :tabList="tabList" :selectIndex.sync="tabIndex" :textColor="tabTextColor"></Tabbar>
 </template>
 
 <script>
     import wepy from 'wepy'
     import Tabbar from '../components/tabbar'
+    import UserInfo from '../components/user_info'
     export default class Index extends wepy.page {
         config = {
             navigationBarTitleText: '首页'
         }
         components = {
-            Tabbar: Tabbar
+            Tabbar: Tabbar,
+            UserInfo: UserInfo
         }
         data = {
             userInfo: {
                 nickName: '加载中1...'
             },
+            tabIndex: 0,
             tabList: [{
                 sTitle: '我要报修',
                 iCount: 0,
-                sIconUrl: '../images/ic_assignment_black_24dp_2x.png'
+                sIconUrl: '../images/ic_assignment_black_24dp_2x.png',
+                pIconUrl: '../images/ic_assignment_black_24dp_2x_p.png'
             }, {
                 sTitle: '我的',
                 iCount: 0,
-                sIconUrl: '../images/ic_account_circle_black_24dp_2x.png'
-            }]
+                sIconUrl: '../images/ic_account_circle_black_24dp_2x.png',
+                pIconUrl: '../images/ic_account_circle_black_24dp_2x_p.png'
+            }],
+            tabTextColor: {
+                default: '#9a9a9a',
+                select: '#09bb07'
+            }
         }
 
         computed = {}
 
-        methods = {}
+        methods = {
+            click_report() {
+                wepy.navigateTo({
+                    url: 'repair_apply'
+                })
+            }
+        }
 
         onLoad () {
             let self = this
             this.$parent.getUserInfo(function (userInfo) {
-
                 if (userInfo) {
                     console.log(userInfo)
                     self.userInfo = userInfo

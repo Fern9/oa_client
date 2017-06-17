@@ -1,3 +1,4 @@
+import wepy from 'wepy'
 function formatTime (date) {
     var year = date.getFullYear()
     var month = date.getMonth() + 1
@@ -15,6 +16,23 @@ function formatNumber (n) {
     return n[1] ? n : '0' + n
 }
 
-module.exports = {
-    formatTime: formatTime
+function judgeForm (form) {
+    for (let key in form) {
+        if (form[key] === '') {
+            wepy.showModal({
+                title: '提示',
+                content: '你还没有填完呢',
+                showCancel: false,
+                confirmText: '继续填'
+            })
+            return 0
+        }
+    }
+    return 1
 }
+
+module.exports = {
+    formatTime: formatTime,
+    judgeForm: judgeForm
+}
+

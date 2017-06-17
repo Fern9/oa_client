@@ -1,4 +1,22 @@
+<!--suppress CssInvalidPropertyValue -->
+<style>
+    .content {
+        display: flex;
+        width: 100%;
+        height: 600 rpx;
+        margin: 40 rpx;
+        padding: 40 rpx;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #ff0;
+    }
 
+    .btn-area {
+        width: 80%;
+    }
+</style>
+<template>
     <form bindsubmit="formSubmit" bindreset="formReset">
         <view class="weui-cells__title">个人信息</view>
         <view class="weui-cells weui-cells_after-title">
@@ -56,12 +74,13 @@
                 </view>
             </view>
 
-            <checkbox-group bindchange="changeAgree">
+            <checkbox-group @change="changeAgree">
                 <label class="weui-agree" for="weuiAgree">
                     <view class="weui-agree__text">
                         <checkbox class="weui-agree__checkbox" id="weuiAgree" value="1" checked="{{isAgree}}"/>
                         <view class="weui-agree__checkbox-icon">
-                            <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9"  wx:if="{{isAgree}}"/>
+                            <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9"
+                                  wx:if="{{isAgree}}"></icon>
                         </view>
                         阅读并同意
                         <navigator url="" class="weui-agree__link">《相关条款》</navigator>
@@ -70,6 +89,63 @@
             </checkbox-group>
         </view>
         <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" formType="submit">确定</button>
+            <button class="weui-btn" type="primary" formType="submit">保存</button>
         </view>
     </form>
+
+</template>
+<script>
+    import wepy from 'wepy'
+    import Net from '../utils/net'
+
+    export default class UserInfo extends wepy.component {
+        onLoad (query) {
+        }
+
+        components = {}
+        data = {
+            isAgree: false
+        }
+
+        computed = {}
+
+        methods = {
+            changeAgree(v) {
+                this.isAgree = !!v.detail.value[0]
+            },
+            formSubmit(event) {
+                let form = event.detail.value
+                console.log(form)
+                for (let key in form) {
+                    if (form[key] === '') {
+                        wepy.showModal({
+                            title: '提示',
+                            content: '你还没有填完呢',
+                            showCancel: false,
+                            confirmText: '继续填'
+                        })
+                        return
+                    }
+                }
+
+                let userinfo = event.detail.value
+                Net.post('/auth/user', {
+                    action: 'register',
+                    wx_userinfo: this.wx_userinfo,
+                    userinfo: userinfo,
+                    code: this.code
+                }, (res) => {
+                    if (res.code === 200) {
+                        wepy.showToast({
+                            title: '注册成功',
+                            icon: 'success',
+                            duration: 2000
+                        })
+                    }
+                })
+            }
+
+        }
+    }
+
+</script>

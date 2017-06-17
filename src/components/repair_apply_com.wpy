@@ -1,0 +1,129 @@
+<!--suppress CssInvalidPropertyValue -->
+<style>
+
+</style>
+<template>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <!--<view class="weui-cells__title">维修单</view>-->
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">维修主体</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker name="trouble_thing_index" @change="bindAccountChange" value="{{accountIndex}} "
+                            range-key="title"
+                            range="{{accounts}}">
+                        <view class="weui-select">{{accounts[accountIndex].title}}</view>
+                    </picker>
+                    <input wx:if="{{accounts[accountIndex].id==-1}}" name="trouble_thing" class="weui-input"
+                           placeholder="请填写维修主体"/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">维修地点</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="address" class="weui-input" placeholder="请填写需要维修的地点"/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">联系电话</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="phone" class="weui-input" placeholder="请填写您的联系电话"/>
+                </view>
+            </view>
+
+            <view class="weui-cells__title">描述</view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell">
+                    <!--<view class="weui-cell__hd">-->
+                    <!--<view class="weui-label">描述</view>-->
+                    <!--</view>-->
+                    <view class="weui-cell__bd">
+                        <textarea name="description" class="weui-textarea" placeholder="请填写故障详细情况"
+                                  style="height: 3.3em"/>
+                        <view class="weui-textarea-counter">0/800</view>
+                    </view>
+                </view>
+            </view>
+
+            <!--<view class="weui-cells__title">必要信息</view>-->
+
+
+            <view class="weui-cells__title">备注</view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell">
+                    <!--<view class="weui-cell__hd">-->
+                    <!--<view class="weui-label">备注</view>-->
+                    <!--</view>-->
+                    <view class="weui-cell__bd">
+                        <textarea name="comment" class="weui-textarea" placeholder="请填写故障详细情况" style="height: 3.3em"/>
+                        <view class="weui-textarea-counter">0/200</view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" formType="submit">提交</button>
+        </view>
+    </form>
+
+</template>
+<script>
+    import wepy from 'wepy'
+    import Net from '../utils/net'
+    import Util from '../utils/util'
+    export default class RepairApply extends wepy.component {
+        onLoad (query) {
+        }
+
+        components = {}
+        data = {
+            isAgree: false,
+            accounts: [
+                {'id': 0, title: '选择一个维修主体'},
+                {'id': 1, title: '空气净化器'},
+                {'id': 2, title: '空调'},
+                {'id': 3, title: 'MacBook Pro'},
+                {'id': -1, title: '其他'}
+            ],
+            accountIndex: 0
+        }
+
+        computed = {}
+
+        methods = {
+            formSubmit(event) {
+                let form = event.detail.value
+                if (this.accounts[this.accountIndex].id !== -1) {
+                    form.trouble_thing = this.accounts[this.accountIndex].title
+                    if (this.accounts[this.accountIndex].id === 0) {
+                        form.trouble_thing = ''
+                    }
+                }
+                console.log(form)
+                if (Util.judgeForm(form)) {
+                    Net.post('/process/instance', {
+                        action: 'create',
+                        process_name: 'repair_apply',
+                        form: form
+                    }, (res) => {
+
+                    })
+                }
+            },
+            bindAccountChange (e) {
+                console.log('picker country 发生选择改变，携带值为', e.detail.value)
+                this.accountIndex = e.detail.value
+            }
+        }
+    }
+
+</script>
