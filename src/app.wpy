@@ -43,6 +43,7 @@
             console.log('caniuse', wepy.canIUse('request.success.header'))
         }
 
+
         getUserInfo (cb) {
             const that = this
             wepy.login({
@@ -66,13 +67,12 @@
                                             url: 'register'
                                         })
                                     }
-                                    Net.post('/auth/login', {
-                                        aa: '111'
-                                    }, (res) => {
+                                    // Net.post('/auth/login', {
+                                    //     aa: '111'
+                                    // }, (res) => {
 
-                                    })
+                                    // })
                                 })
-
                                 that.globalData.userInfo = res.userInfo
                                 cb && cb(res.userInfo)
                             }

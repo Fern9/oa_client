@@ -39,7 +39,7 @@
                 </view>
             </view>
 
-            <view class="weui-cells__title">描述</view>
+            <!--<view class="weui-cells__title">描述</view>-->
             <view class="weui-cells weui-cells_after-title">
                 <view class="weui-cell">
                     <!--<view class="weui-cell__hd">-->
@@ -56,7 +56,7 @@
             <!--<view class="weui-cells__title">必要信息</view>-->
 
 
-            <view class="weui-cells__title">备注</view>
+            <!--<view class="weui-cells__title">备注</view>-->
             <view class="weui-cells weui-cells_after-title">
                 <view class="weui-cell">
                     <!--<view class="weui-cell__hd">-->
