@@ -15,7 +15,9 @@ let net = {
                 console.log('statusCode:', res.statusCode, 'header:', res.header)
                 let cookies = res.header['Set-Cookie']
                 console.log(cookies)
-                wepy.setStorageSync('cookies', cookies)
+                if (cookies && cookies.length > 0) {
+                    wepy.setStorageSync('cookies', cookies)
+                }
 
                 callback(res.data)
             }

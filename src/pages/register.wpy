@@ -3,7 +3,7 @@
 
 </style>
 <template>
-    <userinfo :wx_userinfo="wx_userinfo" :code="code"/>
+    <userinfo :wx_userinfo.sync="wx_userinfo" :code.sync="code"/>
 
 </template>
 <script>

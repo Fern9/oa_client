@@ -1,6 +1,8 @@
 <!--suppress CssInvalidPropertyValue -->
 <style>
-
+    .mm {
+        height: 23rpx;
+    }
 </style>
 <template>
     <RapCom/>

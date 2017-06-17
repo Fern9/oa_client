@@ -141,6 +141,9 @@
                             icon: 'success',
                             duration: 2000
                         })
+                        wepy.redirectTo({
+                            url: 'index'
+                        })
                     }
                 })
             }
