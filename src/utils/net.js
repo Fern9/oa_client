@@ -14,8 +14,19 @@ let net = {
             success: (res) => {
                 console.log('statusCode:', res.statusCode, 'header:', res.header)
                 let cookies = res.header['Set-Cookie']
-                console.log(cookies)
                 if (cookies && cookies.length > 0) {
+                    cookies = cookies.split(';')
+                    let cookies_list = []
+                    for (let cookie of cookies) {
+                        let parts = cookie.split(',')
+                        for (let part of parts) {
+                            if (part.indexOf('=') >= 0) {
+                                cookies_list.push(part)
+                            }
+                        }
+                        console.log(cookies_list)
+                        cookies = cookies_list.join(';')
+                    }
                     wepy.setStorageSync('cookies', cookies)
                 }
 

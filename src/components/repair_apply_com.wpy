@@ -39,7 +39,7 @@
                 </view>
             </view>
 
-            <!--<view class="weui-cells__title">描述</view>-->
+            <view class="weui-cells__title">描述</view>
             <view class="weui-cells weui-cells_after-title">
                 <view class="weui-cell">
                     <!--<view class="weui-cell__hd">-->
@@ -56,14 +56,14 @@
             <!--<view class="weui-cells__title">必要信息</view>-->
 
 
-            <!--<view class="weui-cells__title">备注</view>-->
+            <view class="weui-cells__title">备注</view>
             <view class="weui-cells weui-cells_after-title">
                 <view class="weui-cell">
                     <!--<view class="weui-cell__hd">-->
                     <!--<view class="weui-label">备注</view>-->
                     <!--</view>-->
                     <view class="weui-cell__bd">
-                        <textarea name="comment" class="weui-textarea" placeholder="请填写故障详细情况" style="height: 3.3em"/>
+                        <textarea name="comment" class="weui-textarea" placeholder="" style="height: 3.3em"/>
                         <view class="weui-textarea-counter">0/200</view>
                     </view>
                 </view>
