@@ -91,9 +91,15 @@
             isAgree: false,
             accounts: [
                 {'id': 0, title: '选择一个维修主体'},
-                {'id': 1, title: '空气净化器'},
-                {'id': 2, title: '空调'},
-                {'id': 3, title: 'MacBook Pro'},
+                {'id': 1, title: '台式电脑'},
+                {'id': 2, title: '笔记本'},
+                {'id': 3, title: '打印机'},
+                {'id': 4, title: '复印机'},
+                {'id': 5, title: '网络故障'},
+                {'id': 6, title: '投影机'},
+                {'id': 7, title: '实物展台'},
+                {'id': 8, title: '中控'},
+                {'id': 9, title: '校园广播'},
                 {'id': -1, title: '其他'}
             ],
             accountIndex: 0
