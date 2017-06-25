@@ -16,12 +16,12 @@ function formatNumber (n) {
     return n[1] ? n : '0' + n
 }
 
-function judgeForm (form) {
+function judgeForm (form, require_list) {
     for (let key in form) {
-        if (form[key] === '') {
+        if (form[key] === '' && require_list.indexOf(key) != -1) {
             wepy.showModal({
                 title: '提示',
-                content: '你还没有填完呢',
+                content: '还有必选项未填写',
                 showCancel: false,
                 confirmText: '继续填'
             })
