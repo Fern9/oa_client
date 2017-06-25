@@ -1,0 +1,66 @@
+<!--suppress ALL -->
+<style>
+
+    .avatar {
+        width: 100rpx;
+        height: 100rpx;
+        border-radius: 50%;
+    }
+
+    .head_card {
+        width: 93%;
+        margin-top: 10rpx;
+    }
+
+    .nickname {
+        color: #838383;
+        margin-left: 20rpx;
+    }
+
+    .arr {
+        flex: 1;
+    }
+</style>
+
+<template>
+    <view class="head_card">
+        <view class="page">
+            <view class="page__bd ">
+                <view class="weui-panel weui-panel_access">
+                    <view class="weui-panel__hd">个人信息</view>
+                    <view class="weui-panel__bd">
+                        <view class="weui-media-box weui-media-box_appmsg weui-panel__ft"
+                              hover-class="weui-cell_active">
+                            <image class="avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
+                            <view class="nickname">{{ userInfo.nickName }}</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access arr"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+        <order_card/>
+    </view>
+
+</template>
+
+<script>
+    import wepy from 'wepy'
+    import order_category from '../components/oder_category'
+    export default class My extends wepy.component {
+        props = {
+            userInfo: {}
+        }
+        components = {
+            order_card: order_category
+        }
+        computed = {}
+        data = {}
+        methods = {}
+
+        onLoad () {
+        }
+    }
+
+</script>

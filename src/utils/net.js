@@ -15,14 +15,12 @@ let net = {
                 console.log('statusCode:', res.statusCode, 'header:', res.header)
                 let cookies = res.header['Set-Cookie']
                 if (cookies && cookies.length > 0) {
-                    cookies = cookies.split(';')
+                    cookies = cookies.split(',')
                     let cookies_list = []
                     for (let cookie of cookies) {
-                        let parts = cookie.split(',')
-                        for (let part of parts) {
-                            if (part.indexOf('=') >= 0) {
-                                cookies_list.push(part)
-                            }
+                        let parts = cookie.split(';')
+                        if (parts[0].indexOf('=') >= 0) {
+                            cookies_list.push(parts[0])
                         }
                         console.log(cookies_list)
                         cookies = cookies_list.join(';')
