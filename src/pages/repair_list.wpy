@@ -1,0 +1,52 @@
+<!--suppress CssInvalidPropertyValue -->
+<style>
+    .mm {
+        height: 23 rpx;
+    }
+</style>
+<template>
+    <TaskList :title.sync="title" :process_list.sync="process_list"/>
+
+</template>
+<script>
+    import wepy from 'wepy'
+    import TaskList from '../components/task_list'
+    import Net from '../utils/net'
+    export default class Rap extends wepy.page {
+        onLoad(query) {
+            var process = query['process_name']
+            var action = query.action
+            this.title = this.to_ch[action]
+            Net.get('/process/activities?view='+action,{},(res) => {
+                console.log(res)
+                if(res.code === 200){
+                    this.process_list = res.data
+                }
+            })
+//            this.process_list = []
+        }
+
+        config = {
+        }
+
+        components = {
+            TaskList: TaskList
+        }
+        data = {
+            to_ch: {
+                'get_list_start_by_me': '我的报修',
+                'get_history': '历史记录',
+                'get_wait': '抢单列表',
+                'get_running': '待处理',
+                'get_all_wait': '所有待处理任务'
+            },
+            title: '抢单',
+            process_list: []
+        }
+
+        computed = {}
+
+        methods = {}
+    }
+
+</script>

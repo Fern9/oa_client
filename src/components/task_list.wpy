@@ -1,0 +1,59 @@
+<!--suppress CssInvalidPropertyValue -->
+<style>
+    .content {
+        display: flex;
+        width: 100%;
+        height: 600 rpx;
+        margin: 40 rpx;
+        padding: 40 rpx;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #ff0;
+    }
+
+    .btn-area {
+        width: 80%;
+    }
+
+    .required {
+        color: red;
+    }
+</style>
+<template>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class="weui-cells__title">{{ title }}</view>
+        <repeat class="weui-cells weui-cells_after-title" for="{{process_list}}" key="index" index="index" item="item">
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd">{{item.form.trouble_thing}}  {{ item.form.address}}</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+        </repeat>
+    </form>
+
+</template>
+<script>
+    import wepy from 'wepy'
+//    import Net from '../utils/net'
+//    import util from '../utils/util'
+    export default class TaskList extends wepy.component {
+        props = {
+            title: String,
+            process_list: {
+                type: [Array],
+                default: []
+            }
+        }
+        onLoad (query) {
+        }
+
+        components = {}
+
+        computed = {}
+
+        methods = {
+
+        }
+    }
+
+</script>
