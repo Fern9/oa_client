@@ -1,8 +1,8 @@
 <style>
     .re {
         background-color: #3CC51F;
-        width: 900 rpx;
-        height: 900 rpx;
+        width: 900rpx;
+        height: 900rpx;
         display: block;
     }
 

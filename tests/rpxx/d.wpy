@@ -1,0 +1,89 @@
+<!--suppress ALL -->
+<style>
+    .order_card {
+        margin-top: 10rpx;
+        margin-top: 10rpx;
+        margin-top: 10rpx;
+        margin-top: 10rpx;
+        margin-top: 10rpx;
+    }
+
+    .ord_title {
+        color: #282828;
+        height: 12rpx;
+    }
+
+    .order_box {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-items: stretch;
+    }
+
+    .order_item {
+
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: space-between;
+        align-content: space-between;
+    }
+
+    .ord_txt {
+        font-size: 14px;
+    }
+</style>
+
+<template>
+    <view class="page order_card">
+        <view class="page__bd">
+            <view class="weui-panel weui-panel_access">
+                <view class="weui-panel__hd weui-media-box weui-media-box_appmsg weui-panel__ft ord_title"
+                      hover-class="weui-cell_active" @tap="onClickMyOrder">
+                    我的订单
+                    <view class="weui-cell__ft weui-cell__ft_in-access arr"></view>
+                </view>
+
+                <view class="weui-panel__bd">
+                    <view class="weui-media-box weui-media-box_appmsg weui-panel__ft order_box">
+
+                        <view class="order_item" hover-class="weui-cell_active">
+                            <image src="../images/order_black.png"></image>
+                            <text class="ord_txt">待接单</text>
+                        </view>
+                        <view class="order_item" hover-class="weui-cell_active">
+                            <image src="../images/order_doing.png"></image>
+                            <text class="ord_txt">待修理</text>
+                        </view>
+                        <view class="order_item" hover-class="weui-cell_active">
+                            <image src="../images/order_finish.png"></image>
+                            <text class="ord_txt">已完成</text>
+                        </view>
+
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+</template>
+
+<script>
+    import wepy from 'wepy'
+    export default class Oder_Category extends wepy.component {
+        props = {}
+        computed = {}
+        data = {}
+        methods = {
+            onClickMyOrder(){
+                wepy.navigateTo({
+                    url: 'repair_list?action=get_list_start_by_me'
+                })
+            }
+        }
+
+        onLoad () {
+        }
+    }
+
+</script>
