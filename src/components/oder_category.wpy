@@ -46,11 +46,13 @@
                             <image src="../images/order_black.png"></image>
                             <text class="ord_txt">待接单</text>
                         </view>
-                        <view class="order_item" hover-class="weui-cell_active" @tap="onClickMyOrder('get_wait_repair')">
+                        <view class="order_item" hover-class="weui-cell_active"
+                              @tap="onClickMyOrder('get_wait_repair')">
                             <image src="../images/order_doing.png"></image>
                             <text class="ord_txt">待修理</text>
                         </view>
-                        <view class="order_item" hover-class="weui-cell_active" @tap="onClickMyOrder('get_end_history')">
+                        <view class="order_item" hover-class="weui-cell_active"
+                              @tap="onClickMyOrder('get_end_history')">
                             <image src="../images/order_finish.png"></image>
                             <text class="ord_txt">已完成</text>
                         </view>
@@ -72,7 +74,7 @@
         methods = {
             onClickMyOrder(type){
                 wepy.navigateTo({
-                    url: 'repair_list?action='+type
+                    url: 'repair_list?action=' + type
                 })
             }
         }
