@@ -1,7 +1,7 @@
 <!--suppress CssInvalidPropertyValue -->
 <style>
     .mm {
-        height: 23 rpx;
+        height: 23rpx;
     }
 </style>
 <template>
@@ -12,22 +12,21 @@
     import wepy from 'wepy'
     import TaskList from '../components/task_list'
     import Net from '../utils/net'
-    export default class Rap extends wepy.page {
-        onLoad(query) {
+    export default class RapList extends wepy.page {
+        onLoad (query) {
             var process = query['process_name']
             var action = query.action
             this.title = this.to_ch[action]
-            Net.get('/process/activities?view='+action,{},(res) => {
+            Net.get('/process/activities?view=' + action, {}, (res) => {
                 console.log(res)
-                if(res.code === 200){
+                if (res.code === 200) {
                     this.process_list = res.data
                 }
             })
 //            this.process_list = []
         }
 
-        config = {
-        }
+        config = {}
 
         components = {
             TaskList: TaskList

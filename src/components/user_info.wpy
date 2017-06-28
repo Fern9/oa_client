@@ -125,6 +125,8 @@
         onLoad (query) {
         }
 
+        props = {}
+
         components = {}
         data = {
             isAgree: false
@@ -154,23 +156,38 @@
 //                }
 
                 let userinfo = event.detail.value
-                Net.post('/auth/user', {
-                    action: 'register',
-                    wx_userinfo: this.wx_userinfo,
-                    userinfo: userinfo,
-                    code: this.code
-                }, (res) => {
-                    if (res.code === 200) {
-                        wepy.showToast({
-                            title: '注册成功',
-                            icon: 'success',
-                            duration: 2000
-                        })
-                        wepy.redirectTo({
-                            url: 'index'
-                        })
+                wepy.login({
+                    success: (res) => {
+                        if (res.code) {
+                            console.log(res)
+                            this.code = res.code
+                            Net.post('/auth/user', {
+                                action: 'register',
+                                wx_userinfo: this.wx_userinfo,
+                                userinfo: userinfo,
+                                code: res.code
+                            }, (res) => {
+                                if (res.code === 200) {
+                                    wepy.showToast({
+                                        title: '注册成功',
+                                        icon: 'success',
+                                        duration: 2000
+                                    })
+                                    wepy.redirectTo({
+                                        url: 'index'
+                                    })
+                                } else {
+                                    wepy.showToast({
+                                        title: '注册失败:' + res.msg,
+                                        icon: 'error',
+                                        duration: 2000
+                                    })
+                                }
+                            })
+                        }
                     }
                 })
+
             }
 
         }

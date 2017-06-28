@@ -11,14 +11,6 @@
     import UserInfo from '../components/user_info'
     export default class Register extends wepy.page {
         onLoad (query) {
-            wepy.login({
-                success: (res) => {
-                    if (res.code) {
-                        console.log(res)
-                        this.code = res.code
-                    }
-                }
-            })
             this.wx_userinfo = this.$parent.globalData.userInfo
         }
 

@@ -20,7 +20,8 @@
             pages: [
                 'pages/index',
                 'pages/register',
-                'pages/repair_apply'
+                'pages/repair_apply',
+                'pages/repair_list'
             ],
             window: {
                 backgroundColor: '#eeeeee',
