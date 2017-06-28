@@ -34,7 +34,7 @@
         <view class="page__bd">
             <view class="weui-panel weui-panel_access">
                 <view class="weui-panel__hd weui-media-box weui-media-box_appmsg weui-panel__ft ord_title"
-                      hover-class="weui-cell_active" @tap="onClickMyOrder">
+                      hover-class="weui-cell_active" @tap="onClickMyOrder('get_all_history')">
                     我的订单
                     <view class="weui-cell__ft weui-cell__ft_in-access arr"></view>
                 </view>
@@ -42,15 +42,15 @@
                 <view class="weui-panel__bd">
                     <view class="weui-media-box weui-media-box_appmsg weui-panel__ft order_box">
 
-                        <view class="order_item" hover-class="weui-cell_active">
+                        <view class="order_item" hover-class="weui-cell_active" @tap="onClickMyOrder('get_wait_order')">
                             <image src="../images/order_black.png"></image>
                             <text class="ord_txt">待接单</text>
                         </view>
-                        <view class="order_item" hover-class="weui-cell_active">
+                        <view class="order_item" hover-class="weui-cell_active" @tap="onClickMyOrder('get_wait_repair')">
                             <image src="../images/order_doing.png"></image>
                             <text class="ord_txt">待修理</text>
                         </view>
-                        <view class="order_item" hover-class="weui-cell_active">
+                        <view class="order_item" hover-class="weui-cell_active" @tap="onClickMyOrder('get_end_history')">
                             <image src="../images/order_finish.png"></image>
                             <text class="ord_txt">已完成</text>
                         </view>
@@ -70,9 +70,9 @@
         computed = {}
         data = {}
         methods = {
-            onClickMyOrder(){
+            onClickMyOrder(type){
                 wepy.navigateTo({
-                    url: 'repair_list?action=get_list_start_by_me'
+                    url: 'repair_list?action='+type
                 })
             }
         }
