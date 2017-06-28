@@ -18,7 +18,7 @@ function formatNumber (n) {
 
 function judgeForm (form, require_list) {
     for (let key in form) {
-        if (form[key] === '' && require_list.indexOf(key) != -1) {
+        if (form[key] === '' && require_list.indexOf(key) !== -1) {
             wepy.showModal({
                 title: '提示',
                 content: '还有必选项未填写',

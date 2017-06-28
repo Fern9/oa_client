@@ -24,6 +24,7 @@
                 'pages/repair_list'
             ],
             window: {
+                backgroundColor: '#eeeeee',
                 backgroundTextStyle: 'light',
                 navigationBarBackgroundColor: '#fff',
                 navigationBarTitleText: 'WeChat',
@@ -35,18 +36,16 @@
             userInfo: null
         }
 
-        constructor() {
+        constructor () {
             super()
             this.use('requestfix')
         }
 
-        onLaunch() {
-
+        onLaunch () {
             console.log('caniuse', wepy.canIUse('request.success.header'))
         }
 
-
-        getUserInfo(cb) {
+        getUserInfo (cb) {
             const that = this
             wepy.login({
                 success: function (res) {
@@ -67,7 +66,6 @@
                                     if (res.code === 404) {
                                         wepy.redirectTo({
                                             url: 'register'
-//                                            url: 'repair_list?action=get_list_start_by_me'
                                         })
                                     }
                                     // Net.post('/auth/login', {

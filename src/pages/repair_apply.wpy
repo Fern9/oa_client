@@ -3,6 +3,9 @@
     .mm {
         height: 23rpx;
     }
+    page{
+        background-color: #eeeeee;
+    }
 </style>
 <template>
     <RapCom/>
