@@ -33,8 +33,10 @@
         }
         data = {
             to_ch: {
-                'get_list_start_by_me': '我的报修',
-                'get_history': '历史记录',
+                'get_all_history': '我的订单',
+                'get_wait_order': '待抢单',
+                'get_wait_repair': '待维修',
+                'get_end_history': '已完成',
                 'get_wait': '抢单列表',
                 'get_running': '待处理',
                 'get_all_wait': '所有待处理任务'
