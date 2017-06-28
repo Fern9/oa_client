@@ -18,7 +18,7 @@
             var action = query.action
             this.title = this.to_ch[action]
             Net.get('/process/activities?view='+action,{},(res) => {
-                console.log(res)
+                console.log(res.data[0]._id.$oid)
                 if(res.code === 200){
                     this.process_list = res.data
                 }

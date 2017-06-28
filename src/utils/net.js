@@ -14,6 +14,7 @@ let net = {
             success: (res) => {
                 console.log('statusCode:', res.statusCode, 'header:', res.header)
                 let cookies = res.header['Set-Cookie']
+                console.log('front', cookies)
                 if (cookies && cookies.length > 0) {
                     cookies = cookies.split(';')
                     let cookies_list = []
@@ -24,11 +25,13 @@ let net = {
                                 cookies_list.push(part)
                             }
                         }
-                        console.log(cookies_list)
                         cookies = cookies_list.join(';')
+
                     }
+                    console.log('after', cookies)
                     wepy.setStorageSync('cookies', cookies)
                 }
+                //     wepy.setStorageSync('cookies', cookies)
 
                 callback(res.data)
             }
