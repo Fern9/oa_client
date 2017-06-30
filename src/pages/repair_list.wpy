@@ -1,7 +1,7 @@
 <!--suppress CssInvalidPropertyValue -->
 <style>
     .mm {
-        height: 23rpx;
+        height: 23 rpx;
     }
 </style>
 <template>
@@ -13,20 +13,26 @@
     import TaskList from '../components/task_list'
     import Net from '../utils/net'
     export default class RapList extends wepy.page {
-        onLoad (query) {
+        onLoad(query) {
             var process = query['process_name']
             var action = query.action
             this.title = this.to_ch[action]
+            wx.setNavigationBarTitle({title: this.title})
             Net.get('/process/activities?view=' + action, {}, (res) => {
-                console.log(res)
                 if (res.code === 200) {
+                    // 将时间戳转化为日期格式
+                    for (process in res.data) {
+                        res.data[process].start_time = new Date(res.data[process].start_time.$date).toLocaleString().replace(/:\d{1,2}$/, ' ')
+                    }
+                    console.log(res.data)
                     this.process_list = res.data
                 }
             })
-//            this.process_list = []
         }
 
-        config = {}
+        config = {
+            "navigationBarTitleText": ""
+        }
 
         components = {
             TaskList: TaskList
@@ -34,7 +40,7 @@
         data = {
             to_ch: {
                 'get_all_history': '我的订单',
-                'get_wait_order': '待抢单',
+                'get_wait_order': '待接单',
                 'get_wait_repair': '待维修',
                 'get_end_history': '已完成',
                 'get_wait': '抢单列表',

@@ -1,6 +1,6 @@
 <!--suppress CssInvalidPropertyValue -->
 <style>
-    .required{
+    .required {
         color: red;
     }
 </style>
@@ -83,7 +83,7 @@
     import Net from '../utils/net'
     import Util from '../utils/util'
     export default class RepairApply extends wepy.component {
-        onLoad (query) {
+        onLoad(query) {
         }
 
         components = {}
@@ -123,7 +123,24 @@
                         process_name: 'repair_apply',
                         form: form
                     }, (res) => {
-
+                        if (res.code === 200) {
+                            wepy.showToast({
+                                title: '报修成功',
+                                icon: 'success',
+                                duration: 2000,
+                                success: function () {
+                                    wepy.redirectTo({
+                                        url: 'index'
+                                    })
+                                }
+                            })
+                        } else {
+                            wepy.showToast({
+                                title: '报修失败，请联系管理员',
+                                icon: 'fail',
+                                duration: 2000
+                            })
+                        }
                     })
                 }
             },

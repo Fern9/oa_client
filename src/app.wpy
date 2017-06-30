@@ -21,7 +21,8 @@
                 'pages/index',
                 'pages/register',
                 'pages/repair_apply',
-                'pages/repair_list'
+                'pages/repair_list',
+                'pages/repair_deal'
             ],
             window: {
                 backgroundColor: '#eeeeee',

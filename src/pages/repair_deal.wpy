@@ -1,0 +1,31 @@
+<!--suppress CssInvalidPropertyValue -->
+<style>
+
+</style>
+<template>
+    <RapCom/>
+</template>
+<script>
+    import wepy from 'wepy'
+    import RapCom from '../components/repair_apply_com'
+//    import Net from '../utils/net'
+    export default class RapList extends wepy.page {
+        onLoad(query) {
+
+        }
+
+        config = {
+            'navigationBarTitleText': '订单详情'
+        }
+
+        components = {
+            RapCom: RapCom
+        }
+        data = {}
+
+        computed = {}
+
+        methods = {}
+    }
+
+</script>
