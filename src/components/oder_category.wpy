@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <style>
     .order_card {
-        margin-top: 10 rpx;
+        margin-top: 10rpx;
     }
 
     .ord_title {

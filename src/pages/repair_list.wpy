@@ -1,11 +1,11 @@
 <!--suppress CssInvalidPropertyValue -->
 <style>
     .mm {
-        height: 23 rpx;
+        height: 23rpx;
     }
 </style>
 <template>
-    <TaskList :title.sync="title" :process_list.sync="process_list"/>
+    <TaskList :title.sync="title" :process_list.sync="process_list" :action="action"/>
 
 </template>
 <script>
@@ -15,10 +15,10 @@
     export default class RapList extends wepy.page {
         onLoad(query) {
             var process = query['process_name']
-            var action = query.action
-            this.title = this.to_ch[action]
+            this.action = query.action
+            this.title = this.to_ch[this.action]
             wx.setNavigationBarTitle({title: this.title})
-            Net.get('/process/activities?view=' + action, {}, (res) => {
+            Net.get('/process/activities?view=' + this.action, {}, (res) => {
                 if (res.code === 200) {
                     // 将时间戳转化为日期格式
                     for (process in res.data) {
@@ -48,7 +48,8 @@
                 'get_all_wait': '所有待处理任务'
             },
             title: '抢单',
-            process_list: []
+            process_list: [],
+            action: ''
         }
 
         computed = {}

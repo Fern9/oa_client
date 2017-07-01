@@ -9,7 +9,7 @@
         <view class="page__bd">
             <view class="weui-panel weui-panel_access">
                 <repeat class="weui-cells weui-cells_after-title" for="{{process_list}}" key="index" index="index" item="item">
-                    <navigator url="repair_deal" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <navigator url="repair_deal?init_form=1&action={{action}}&process_id={{item._id.$oid}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                             <view class="weui-cell__bd">{{item.form.trouble_thing}} {{item.start_time}} {{ item.form.address}}</view>
                             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
                     </navigator>
@@ -29,7 +29,8 @@
             process_list: {
                 type: [Array],
                 default: []
-            }
+            },
+            action: String
         }
         onLoad (query) {
         }

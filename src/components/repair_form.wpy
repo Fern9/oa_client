@@ -5,7 +5,7 @@
     }
 </style>
 <template>
-    <form bindsubmit="formSubmit" bindreset="formReset">
+    <view>
         <!--<view class="weui-cells__title">维修单</view>-->
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
@@ -28,7 +28,7 @@
                     <view class="weui-label  required">维修地点</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input name="address" class="weui-input" placeholder="请填写需要维修的地点"/>
+                    <input name="address" class="weui-input"  value="{{form_data.address}}"/>
                 </view>
             </view>
 
@@ -37,7 +37,7 @@
                     <view class="weui-label required">联系电话</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input name="phone" class="weui-input" placeholder="请填写您的联系电话"/>
+                    <input name="phone" class="weui-input" placeholder="请填写您的联系电话" value="{{form_data.phone}}" />
                 </view>
             </view>
 
@@ -49,15 +49,11 @@
                     <!--</view>-->
                     <view class="weui-cell__bd">
                         <textarea name="description" class="weui-textarea" placeholder="请填写故障详细情况"
-                                  style="height: 3.3em"/>
+                                  style="height: 3.3em" value="{{form_data.description}}"/>
                         <view class="weui-textarea-counter">0/800</view>
                     </view>
                 </view>
             </view>
-
-            <!--<view class="weui-cells__title">必要信息</view>-->
-
-
             <view class="weui-cells__title">备注</view>
             <view class="weui-cells weui-cells_after-title">
                 <view class="weui-cell">
@@ -65,24 +61,18 @@
                     <!--<view class="weui-label">备注</view>-->
                     <!--</view>-->
                     <view class="weui-cell__bd">
-                        <textarea name="comment" class="weui-textarea" placeholder="" style="height: 3.3em"/>
+                        <textarea name="comment" class="weui-textarea" placeholder="" style="height: 3.3em" value="{{form_data.comment}}"/>
                         <view class="weui-textarea-counter">0/200</view>
                     </view>
                 </view>
             </view>
-
         </view>
-        <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" formType="submit">提交</button>
-        </view>
-    </form>
+    </view>
 
 </template>
 <script>
     import wepy from 'wepy'
-    import Net from '../utils/net'
-    import Util from '../utils/util'
-    export default class RepairApply extends wepy.component {
+    export default class RepairForm extends wepy.component {
         onLoad(query) {
         }
 
@@ -102,48 +92,13 @@
                 {'id': 9, title: '校园广播'},
                 {'id': -1, title: '其他'}
             ],
-            accountIndex: 0
+            accountIndex: 0,
+            form_data: []
         }
 
         computed = {}
 
         methods = {
-            formSubmit(event) {
-                let form = event.detail.value
-                if (this.accounts[this.accountIndex].id !== -1) {
-                    form.trouble_thing = this.accounts[this.accountIndex].title
-                    if (this.accounts[this.accountIndex].id === 0) {
-                        form.trouble_thing = ''
-                    }
-                }
-                var requiredList = ['trouble_thing', 'address', 'phone']
-                if (Util.judgeForm(form, requiredList)) {
-                    Net.post('/process/instance', {
-                        action: 'create',
-                        process_name: 'repair_apply',
-                        form: form
-                    }, (res) => {
-                        if (res.code === 200) {
-                            wepy.showToast({
-                                title: '报修成功',
-                                icon: 'success',
-                                duration: 2000
-                            })
-                            setTimeout(function() {
-                                wepy.redirectTo({
-                                    url: 'index'
-                                })
-                            }, 1500)
-                        } else {
-                            wepy.showToast({
-                                title: '报修失败，请联系管理员',
-                                icon: 'fail',
-                                duration: 2000
-                            })
-                        }
-                    })
-                }
-            },
             bindAccountChange (e) {
                 console.log('picker country 发生选择改变，携带值为', e.detail.value)
                 this.accountIndex = e.detail.value
