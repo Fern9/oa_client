@@ -6,10 +6,20 @@
     <view>
         <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
-                <view class="weui-label">报修人员</view>
+                <view class="weui-label">当前环节</view>
             </view>
             <view class="weui-cell__bd">
-                <input name="address" class="weui-input"  value="张三"/>
+                <input name="address" class="weui-input"  value={{curr_data.activity_define.define_name}}/>
+            </view>
+        </view>
+    </view>
+    <view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">当前处理人</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="address" class="weui-input"  value="{{curr_participants[0].name}}"/>
             </view>
         </view>
     </view>
@@ -19,17 +29,7 @@
                 <view class="weui-label">报修时间</view>
             </view>
             <view class="weui-cell__bd">
-                <input name="address" class="weui-input"  value="2017/6/30 上午9：06"/>
-            </view>
-        </view>
-    </view>
-    <view>
-        <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-                <view class="weui-label">当前状态</view>
-            </view>
-            <view class="weui-cell__bd">
-                <input name="address" class="weui-input"  value="待接单"/>
+                <input name="address" class="weui-input"  value="{{process_data.start_time}}"/>
             </view>
         </view>
     </view>
@@ -50,8 +50,11 @@
                 this.process_id = query['process_id']
                 Net.get('/process/activities?view=get_process_data&process_id=' + this.process_id, {
                 },(res) => {
+                    console.log(res)
                     this.init_form = true
                     this.process_data = res.data.process_data
+                    this.process_data.start_time = new Date(this.process_data.start_time.$date).toLocaleString().replace(/:\d{1,2}$/, ' ')
+                    this.curr_participants = res.data.curr_participants
                     this.curr_data = res.data.curr_data
                     this.form_data = res.data.process_data.form
                 })
@@ -71,6 +74,7 @@
             process_id:  '',
             curr_data: [],  //当前环节信息
             process_data: [],  //流程信息
+            curr_participants: [], //当前活动处理人
             init_form: false,
             button_text: '',
             form_data: []

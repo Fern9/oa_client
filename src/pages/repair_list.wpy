@@ -5,7 +5,7 @@
     }
 </style>
 <template>
-    <TaskList :title.sync="title" :process_list.sync="process_list" :action="action"/>
+    <TaskList :title.sync="title" :process_list.sync="process_list" :action.sync="action"/>
 
 </template>
 <script>
@@ -34,6 +34,13 @@
             "navigationBarTitleText": ""
         }
 
+        props={
+            title: String,
+            process_list: {
+                type: [Array]
+            },
+            action: String
+        }
         components = {
             TaskList: TaskList
         }
