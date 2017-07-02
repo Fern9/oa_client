@@ -17,7 +17,7 @@
             var process = query['process_name']
             this.action = query.action
             this.title = this.to_ch[this.action]
-            wx.setNavigationBarTitle({title: this.title})
+            wepy.setNavigationBarTitle({title: this.title})
             Net.get('/process/activities?view=' + this.action, {}, (res) => {
                 if (res.code === 200) {
                     // 将时间戳转化为日期格式
@@ -34,11 +34,6 @@
         }
 
         props={
-            title: String,
-            process_list: {
-                type: [Array]
-            },
-            action: String
         }
         components = {
             TaskList: TaskList
@@ -52,7 +47,9 @@
                 'get_wait': '抢单列表',
                 'get_running': '待处理',
                 'get_all_wait': '所有待处理任务'
-            }
+            },
+            process_list: [],
+            action: ''
         }
 
         computed = {}

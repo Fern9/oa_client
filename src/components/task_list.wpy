@@ -25,12 +25,10 @@
 //    import util from '../utils/util'
     export default class TaskList extends wepy.component {
         props = {
-            title: String,
             process_list: {
-                type: [Array],
-                default: []
             },
-            action: String
+            action: {
+            }
         }
 
         data = {
