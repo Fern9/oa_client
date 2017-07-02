@@ -34,9 +34,6 @@
         }
 
         data = {
-            process_list: [],
-            title: '',
-            action: ''
         }
         onLoad (query) {
         }

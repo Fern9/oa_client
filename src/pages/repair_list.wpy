@@ -5,7 +5,7 @@
     }
 </style>
 <template>
-    <TaskList :title.sync="title" :process_list.sync="process_list" :action.sync="action"/>
+    <TaskList :process_list.sync="process_list" :action.sync="action"/>
 
 </template>
 <script>
@@ -31,7 +31,6 @@
         }
 
         config = {
-            "navigationBarTitleText": ""
         }
 
         props={
@@ -53,10 +52,7 @@
                 'get_wait': '抢单列表',
                 'get_running': '待处理',
                 'get_all_wait': '所有待处理任务'
-            },
-            title: '抢单',
-            process_list: [],
-            action: ''
+            }
         }
 
         computed = {}
