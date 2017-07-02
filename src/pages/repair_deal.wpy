@@ -9,7 +9,7 @@
                 <view class="weui-label">当前环节</view>
             </view>
             <view class="weui-cell__bd">
-                <input name="address" class="weui-input"  value={{curr_data.activity_define.define_name}}/>
+                <input name="address" class="weui-input" value={{curr_data.activity_define.define_name}}/>
             </view>
         </view>
     </view>
@@ -19,7 +19,7 @@
                 <view class="weui-label">当前处理人</view>
             </view>
             <view class="weui-cell__bd">
-                <input name="address" class="weui-input"  value="{{curr_participants[0].name}}"/>
+                <input name="address" class="weui-input" value="{{curr_participants[0].name}}"/>
             </view>
         </view>
     </view>
@@ -29,7 +29,7 @@
                 <view class="weui-label">报修时间</view>
             </view>
             <view class="weui-cell__bd">
-                <input name="address" class="weui-input"  value="{{process_data.start_time}}"/>
+                <input name="address" class="weui-input" value="{{process_data.start_time}}"/>
             </view>
         </view>
     </view>
@@ -46,10 +46,9 @@
         onLoad(query) {
             console.log(query)
             // 需要初始化表单信息时，请求流程数据并将标志位置为true
-            if(query['init_form'] == 1) {
+            if (query['init_form'] === 1) {
                 this.process_id = query['process_id']
-                Net.get('/process/activities?view=get_process_data&process_id=' + this.process_id, {
-                },(res) => {
+                Net.get('/process/activities?view=get_process_data&process_id=' + this.process_id, {}, (res) => {
                     console.log(res)
                     this.init_form = true
                     this.process_data = res.data.process_data
@@ -58,9 +57,7 @@
                     this.curr_data = res.data.curr_data
                     this.form_data = res.data.process_data.form
                 })
-
             }
-
         }
 
         config = {
@@ -71,10 +68,10 @@
             RepairForm: RepairForm
         }
         data = {
-            process_id:  '',
-            curr_data: [],  //当前环节信息
-            process_data: [],  //流程信息
-            curr_participants: [], //当前活动处理人
+            process_id: '',
+            curr_data: [],  // 当前环节信息
+            process_data: [],  // 流程信息
+            curr_participants: [], // 当前活动处理人
             init_form: false,
             button_text: '',
             form_data: []

@@ -75,7 +75,8 @@
     export default class RepairForm extends wepy.component {
         onLoad(query) {
         }
-
+        props = {
+        }
         components = {}
         data = {
             isAgree: false,
