@@ -76,6 +76,8 @@
         onLoad(query) {
         }
         props = {
+            form_data: {
+            }
         }
         components = {}
         data = {
@@ -93,8 +95,7 @@
                 {'id': 9, title: '校园广播'},
                 {'id': -1, title: '其他'}
             ],
-            accountIndex: 0,
-            form_data: []
+            accountIndex: 0
         }
 
         computed = {}
