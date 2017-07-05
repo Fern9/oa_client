@@ -5,50 +5,26 @@
     }
 </style>
 <template>
-    <TaskList :process_list.sync="process_list" :action.sync="action"/>
+    <TaskList :action.sync="action"/>
 
 </template>
 <script>
     import wepy from 'wepy'
     import TaskList from '../components/task_list'
-    import Net from '../utils/net'
+    //  import Net from '../utils/net'
     export default class RapList extends wepy.page {
-        onLoad(query) {
-            var process = query['process_name']
+        onLoad (query) {
             this.action = query.action
-            this.title = this.to_ch[this.action]
-            wepy.setNavigationBarTitle({title: this.title})
-            Net.get('/process/activities?view=' + this.action, {}, (res) => {
-                if (res.code === 200) {
-                    // 将时间戳转化为日期格式
-                    for (process in res.data) {
-                        res.data[process].start_time = new Date(res.data[process].start_time.$date).toLocaleString().replace(/:\d{1,2}$/, ' ')
-                    }
-                    console.log(res.data)
-                    this.process_list = res.data
-                }
-            })
+            this.$apply()
         }
 
-        config = {
-        }
+        config = {}
 
-        props={
-        }
+        props = {}
         components = {
             TaskList: TaskList
         }
         data = {
-            to_ch: {
-                'get_all_history': '我的订单',
-                'get_wait_order': '待接单',
-                'get_wait_repair': '待维修',
-                'get_end_history': '已完成',
-                'get_wait': '抢单列表',
-                'get_running': '待处理',
-                'get_all_wait': '所有待处理任务'
-            },
-            process_list: [],
             action: ''
         }
 

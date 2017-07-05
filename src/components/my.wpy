@@ -40,14 +40,14 @@
             </view>
 
         </view>
-        <order_card/>
+        <order_card />
     </view>
 
 </template>
 
 <script>
     import wepy from 'wepy'
-    import order_category from '../components/oder_category'
+    import order_category from './order_category'
     export default class My extends wepy.component {
         props = {
             userInfo: {}

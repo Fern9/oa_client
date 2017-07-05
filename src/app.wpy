@@ -34,7 +34,8 @@
         }
 
         globalData = {
-            userInfo: null
+            userInfo: null,
+            role: 'normal'
         }
 
         constructor () {
@@ -63,17 +64,13 @@
                                     code: code,
                                     encryptedData: res.encryptedData,
                                     iv: res.iv
-                                }, (res) => {
-                                    if (res.code === 404) {
+                                }, (r) => {
+                                    if (r.code === 404) {
                                         wepy.redirectTo({
                                             url: 'register'
                                         })
+                                    } else if (r.code === 200) {
                                     }
-                                    // Net.post('/auth/login', {
-                                    //     aa: '111'
-                                    // }, (res) => {
-
-                                    // })
                                 })
                                 that.globalData.userInfo = res.userInfo
                                 cb && cb(res.userInfo)
@@ -82,6 +79,20 @@
                     } else {
                         console.log('获取用户登录态失败！' + res.errMsg)
                     }
+                }
+            })
+        }
+
+        getUserRole (cb) {
+            const that = this
+            Net.get('/auth/user', {
+                view: 'get_curr_user_role'
+            }, (res) => {
+                console.log(res)
+                if (res.code === 200) {
+                    that.globalData.role = res.data.name
+                    that.globalData.role = 'rep'
+                    cb(res.data)
                 }
             })
         }

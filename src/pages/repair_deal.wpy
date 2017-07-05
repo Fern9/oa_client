@@ -9,7 +9,7 @@
                 <view class="weui-label">当前环节</view>
             </view>
             <view class="weui-cell__bd">
-                <input name="address" class="weui-input" value={{curr_data.activity_define.define_name}}/>
+                <input name="address" class="weui-input" value="{{curr_data.activity_define.define_name}}"/>
             </view>
         </view>
     </view>

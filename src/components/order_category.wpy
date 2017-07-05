@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <style>
     .order_card {
-        margin-top: 10rpx;
+        margin-top: 10 rpx;
     }
 
     .ord_title {
@@ -40,9 +40,11 @@
                 </view>
 
                 <view class="weui-panel__bd">
-                    <view class="weui-media-box weui-media-box_appmsg weui-panel__ft order_box">
 
-                        <view class="order_item" hover-class="weui-cell_active" @tap="onClickMyOrder('get_wait_order')">
+                    <view wx:if="{{role=='normal'}}" class="weui-media-box weui-media-box_appmsg weui-panel__ft order_box">
+
+                        <view class="order_item" hover-class="weui-cell_active"
+                              @tap="onClickMyOrder('get_wait_order')">
                             <image src="../images/order_black.png"></image>
                             <text class="ord_txt">待接单</text>
                         </view>
@@ -50,6 +52,21 @@
                               @tap="onClickMyOrder('get_wait_repair')">
                             <image src="../images/order_doing.png"></image>
                             <text class="ord_txt">待修理</text>
+                        </view>
+                        <view class="order_item" hover-class="weui-cell_active"
+                              @tap="onClickMyOrder('get_end_history')">
+                            <image src="../images/order_finish.png"></image>
+                            <text class="ord_txt">已完成</text>
+                        </view>
+
+                    </view>
+
+                    <view wx:else class="weui-media-box weui-media-box_appmsg weui-panel__ft order_box">
+
+                        <view class="order_item" hover-class="weui-cell_active"
+                              @tap="onClickMyOrder('get_wait_repair')">
+                            <image src="../images/order_doing.png"></image>
+                            <text class="ord_txt">正在修理</text>
                         </view>
                         <view class="order_item" hover-class="weui-cell_active"
                               @tap="onClickMyOrder('get_end_history')">
@@ -70,7 +87,9 @@
     export default class Oder_Category extends wepy.component {
         props = {}
         computed = {}
-        data = {}
+        data = {
+            role: 'normal'
+        }
         methods = {
             onClickMyOrder(type){
                 wepy.navigateTo({
@@ -78,8 +97,14 @@
                 })
             }
         }
+        events = {
+            'get-role': (role, $event) => {
+                console.log('get-role', `${role}`);
+                this.role = role
+            }
+        }
 
-        onLoad() {
+        onLoad () {
         }
     }
 

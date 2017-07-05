@@ -5,7 +5,8 @@
         flex-direction: column;
         align-items: center;
     }
-    page{
+
+    page {
         background-color: #eeeeee;
     }
 
@@ -39,7 +40,7 @@
     }
 </style>
 <template>
-    <view class="container">
+    <view class="container" wx:if="{{role=='normal'}}">
         <view wx:if="{{tabIndex==0}}">
             <view class="userinfo" @tap="handleViewTap">
                 <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
@@ -54,7 +55,17 @@
         <My :userInfo.sync="userInfo" wx:else/>
     </view>
 
-    <Tabbar :tabList="tabList" :selectIndex.sync="tabIndex" :textColor="tabTextColor"></Tabbar>
+    <view class="container" wx:else>
+        <view wx:if="{{tabIndex==0}}">
+            <TaskList action="get_wait"/>
+
+        </view>
+
+        <My :userInfo.sync="userInfo" wx:else/>
+    </view>
+
+
+    <Tabbar :tabList.sync="tabList" :selectIndex.sync="tabIndex" :textColor="tabTextColor"></Tabbar>
 </template>
 
 <script>
@@ -62,6 +73,7 @@
     import Tabbar from '../components/tabbar'
     import UserInfo from '../components/user_info'
     import My from '../components/my'
+    import TaskList from '../components/task_list'
     export default class Index extends wepy.page {
         config = {
             navigationBarTitleText: '首页'
@@ -69,7 +81,8 @@
         components = {
             Tabbar: Tabbar,
             UserInfo: UserInfo,
-            My: My
+            My: My,
+            TaskList: TaskList
         }
         data = {
             userInfo: {
@@ -90,7 +103,8 @@
             tabTextColor: {
                 default: '#9a9a9a',
                 select: '#09bb07'
-            }
+            },
+            role: 'user'
         }
 
         computed = {}
@@ -117,6 +131,17 @@
                         duration: 2000
                     })
                 }
+            })
+
+            this.$parent.getUserRole((res) => {
+                self.role = self.$parent.globalData.role
+                if (self.role !== 'normal') {
+                    console.log('role', self.role)
+                    self.tabList[0]['sTitle'] = '抢单'
+                } else {
+                    wepy.setNavigationBarTitle({title: '首页'})
+                }
+                self.$broadcast('get-role', self.role)
             })
         }
     }
