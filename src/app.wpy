@@ -91,7 +91,7 @@
                 console.log(res)
                 if (res.code === 200) {
                     that.globalData.role = res.data.name
-                    that.globalData.role = 'rep'
+                    that.globalData.role = 'repair'
                     cb(res.data)
                 }
             })
