@@ -35,7 +35,7 @@
     </view>
     <RepairForm :form_data.sync="form_data" :init_form="init_form"/>
     <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" formType="submit">确定</button>
+        <button class="weui-btn" type="primary" formType="submit" @tap="clickOk">{{okbtn_text}}</button>
     </view>
 </template>
 <script>
@@ -43,7 +43,7 @@
     import RepairForm from '../components/repair_form'
     import Net from '../utils/net'
     export default class RapList extends wepy.page {
-        onLoad(query) {
+        onLoad (query) {
             // 需要初始化表单信息时，请求流程数据并将标志位置为true
             if (query['init_form'] === '1') {
                 this.process_id = query['process_id']
@@ -56,6 +56,10 @@
                     this.form_data = res.data.process_data.form
                     console.log('dede', this.form_data)
                 })
+            }
+            this.action = query['action']
+            if (this.action === 'get_wait') {
+                this.okbtn_text = '抢单'
             }
         }
 
@@ -73,11 +77,33 @@
             curr_participants: [], // 当前活动处理人
             init_form: false,
             button_text: '',
-            form_data: []
+            form_data: [],
+            action: '',
+            okbtn_text: '确定'
         }
         computed = {}
 
-        methods = {}
+        methods = {
+            clickOk() {
+                if (this.action === 'get_wait') {
+                    Net.post('/process/instance', {
+                        process_id: this.process_id,
+                        action: 'finish'
+                    }, (res) => {
+                        let icon = 'success'
+                        if (res.code !== 200) {
+                            icon = 'error'
+                        }
+                        wepy.showToast({
+                            title: res.msg,
+                            icon: icon,
+                            duration: 2000
+                        })
+                    })
+                }
+
+            }
+        }
     }
 
 </script>
