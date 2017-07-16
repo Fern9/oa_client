@@ -91,7 +91,7 @@
             role: 'normal'
         }
         methods = {
-            onClickMyOrder(type){
+            onClickMyOrder(type) {
                 wepy.navigateTo({
                     url: 'repair_list?action=' + type
                 })
