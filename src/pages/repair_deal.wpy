@@ -50,7 +50,7 @@
                 Net.get('/process/activities?view=get_process_data&process_id=' + this.process_id, {}, (res) => {
                     this.init_form = true
                     this.process_data = res.data.process_data
-                    this.process_data.start_time = new Date(this.process_data.start_time.$date).toLocaleString().replace(/:\d{1,2}$/, ' ')
+                    this.process_data.start_time = new Date(this.process_data.start_time.$date + (new Date()).getTimezoneOffset() * 60000).toLocaleString().replace(/:\d{1,2}$/, ' ')
                     this.curr_participants = res.data.curr_participants
                     this.curr_data = res.data.curr_data
                     this.form_data = res.data.process_data.form

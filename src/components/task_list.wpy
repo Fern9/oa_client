@@ -43,7 +43,7 @@
                 if (res.code === 200) {
                     // 将时间戳转化为日期格式
                     for (let process in res.data) {
-                        res.data[process].start_time = new Date(res.data[process].start_time.$date).toLocaleString().replace(/:\d{1,2}$/, ' ')
+                        res.data[process].start_time = new Date(res.data[process].start_time.$date + (new Date()).getTimezoneOffset() * 60000).toLocaleString().replace(/:\d{1,2}$/, ' ')
                     }
                     console.log(res.data)
                     this.process_list = res.data
