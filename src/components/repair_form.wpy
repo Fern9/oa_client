@@ -66,6 +66,22 @@
                     </view>
                 </view>
             </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label required">维修工时</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="repair_time" class="weui-input" placeholder="请填写维修所用时间" value="{{form_data.repair_time}}" />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label required">维修费用</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input name="repair_count" class="weui-input" placeholder="请填写维修所需费用" value="{{form_data.repair_count}}" />
+                </view>
+            </view>
         </view>
     </view>
 
