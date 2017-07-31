@@ -82,7 +82,7 @@
                     <input name="repair_count" class="weui-input" placeholder="请填写维修所需费用" value="{{form_data.repair_count}}" />
                 </view>
             </view>
-        </view>
+        </view> 
     </view>
 
 </template>
